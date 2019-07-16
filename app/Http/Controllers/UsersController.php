@@ -13,7 +13,7 @@ class UsersController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth', [
-			'except'    =>  ['show', 'create', 'store', 'index']
+			'except'    =>  ['show', 'create', 'store', 'index', 'confirmEmail']
 		]);
 		
 		$this->middleware('guest', [
@@ -52,7 +52,7 @@ class UsersController extends Controller
             'password'  =>  bcrypt($request->password)
         ]);
 		
-//        Auth::login($user);
+        
 	    $this->sendEmailConfirmationTo($user);
         session()->flash('success', '验证邮件已发送到你的注册邮箱上，请注意查收。');
         return redirect('/');
@@ -116,6 +116,6 @@ class UsersController extends Controller
 		
 		Auth::login($user);
 		session()->flash('success', '恭喜你，激活成功！');
-		return redirect()->route('users.show', [$user]);
+		return redirect()->route('users.show',[$user]);
 	}
 }

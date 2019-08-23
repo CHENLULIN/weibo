@@ -17,5 +17,11 @@
  * Admin::js('/packages/prettydocs/js/main.js');
  *
  */
+use App\Admin\Extensions\Form\uEditor;
+use Encore\Admin\Form;
 
 Encore\Admin\Form::forget(['map', 'editor']);
+
+
+
+Form::extend('ueditor', uEditor::class);

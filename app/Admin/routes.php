@@ -12,5 +12,17 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('admin.home');
 	$router->resource('movies', MoviesController::class);
+	
+	Route::group(['prefix'        =>  '/nmo-ms'], function(Router $router) {
+		Route::group(['prefix'        =>  '/article'], function(Router $router) {
+			
+			//文章分类
+			$router->resource('article-categories', ArticleCategoriesController::class);
+			
+			//文章
+			$router->resource('articles', ArticlesController::class);
+		});
+	});
+	
 
 });
